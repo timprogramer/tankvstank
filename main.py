@@ -19,208 +19,27 @@ wrap.world.create_world(500,600,400,400)
 
 tank=wrap.sprite.add("battle_city_tanks",250,300)
 
-time_start=time.time()
-
-while 1==1:
-    time_end=time.time()
-    raznica=time_end-time_start
-    raznica=int(raznica)
-    raznica=str(raznica)
-    minus = time_end-time_start
-    sollox=random.randint(50,450)
-    solloy=random.randint(50,550)
-    if minus>=1:
-        tankskin = random.choice(["tank_enemy_size3_yellow1", "tank_player_size3_purple1","tank_enemy_size1_white2"])
-        wrap.sprite.remove(tank)
-        time.sleep(1)
-        tank=wrap.sprite.add("battle_city_tanks",sollox,solloy)
-        wrap.sprite.set_costume(tank,tankskin)
-        time.sleep(1)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+pacman=wrap.sprite.add("pacman",0,0,"player2",visible=False)
+
+sollox=random.randint(50,450)
+solloy=random.randint(50,550)
+@wrap.always(1200)
+def sollo():
+    sollox = random.randint(50, 450)
+    solloy = random.randint(50, 550)
+    wrap.sprite.move_to(tank,sollox,solloy)
+
+@wrap.on_mouse_down(wrap.BUTTON_LEFT)
+def change(pos_x,pos_y):
+   if wrap.sprite.is_collide_point(tank,pos_x,pos_y) == True :
+        wrap.sprite.set_costume_next(tank)
+
+@wrap.on_key_down(wrap.K_UP)
+def pricel():
+    wrap.sprite.show(pacman)
+
+@wrap.on_mouse_move()
+def slozno(pos_x,pos_y):
+    wrap.sprite.move_to(pacman,pos_x,pos_y)
 
 
