@@ -21,6 +21,8 @@ tank=wrap.sprite.add("battle_city_tanks",250,300)
 
 pacman=wrap.sprite.add("pacman",0,0,"player2",visible=False)
 
+wrap.sprite.set_angle(pacman,0)
+
 sollox=random.randint(50,450)
 solloy=random.randint(50,550)
 @wrap.always(1200)
@@ -37,9 +39,25 @@ def change(pos_x,pos_y):
 @wrap.on_key_down(wrap.K_UP)
 def pricel():
     wrap.sprite.show(pacman)
+    prochentv1 = 0
+    prochentw1 = 0
+    prochentv=wrap.sprite.get_height_percent(pacman)
+    prochentw = wrap.sprite.get_width_percent(pacman)
+    if prochentv == 100 and prochentw == 100 :
+        wrap.sprite.set_size_percent(pacman,prochentv-50,prochentw-50)
+    if prochentv == 50 and prochentw == 50 :
+        prochentv1=100
+        prochentw1=100
+        wrap.sprite.set_size_percent(pacman,prochentv1,prochentw1)
+    if prochentv1 == 100 and prochentw1 == 100:
+        prochentv=150
+        prochentw=150
+        wrap.sprite.set_size_percent(pacman,prochentv,prochentw)
+
 
 @wrap.on_mouse_move()
 def slozno(pos_x,pos_y):
     wrap.sprite.move_to(pacman,pos_x,pos_y)
+
 
 
