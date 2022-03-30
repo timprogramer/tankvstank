@@ -33,26 +33,26 @@ def sollo():
 
 @wrap.on_mouse_down(wrap.BUTTON_LEFT)
 def change(pos_x,pos_y):
-   if wrap.sprite.is_collide_point(tank,pos_x,pos_y) == True :
+    if wrap.sprite.is_collide_point(tank,pos_x,pos_y) == True :
+        wrap.sprite.set_costume_next(tank)
+    elif wrap.sprite.is_collide_sprite(tank,pacman) == True:
         wrap.sprite.set_costume_next(tank)
 
 @wrap.on_key_down(wrap.K_UP)
 def pricel():
-    wrap.sprite.show(pacman)
     prochentv1 = 0
     prochentw1 = 0
     prochentv=wrap.sprite.get_height_percent(pacman)
     prochentw = wrap.sprite.get_width_percent(pacman)
-    if prochentv == 100 and prochentw == 100 :
-        wrap.sprite.set_size_percent(pacman,prochentv-50,prochentw-50)
-    if prochentv == 50 and prochentw == 50 :
-        prochentv1=100
-        prochentw1=100
-        wrap.sprite.set_size_percent(pacman,prochentv1,prochentw1)
-    if prochentv1 == 100 and prochentw1 == 100:
-        prochentv=150
-        prochentw=150
-        wrap.sprite.set_size_percent(pacman,prochentv,prochentw)
+    if wrap.sprite.is_visible(pacman) == False:
+        wrap.sprite.set_size_percent(pacman, 50, 50)
+        wrap.sprite.show(pacman)
+    elif prochentv == 50 and prochentw == 50:
+        wrap.sprite.set_size_percent(pacman,100,100)
+    elif prochentv ==100 and prochentw ==100:
+        wrap.sprite.set_size_percent(pacman, 150, 150)
+    elif prochentv ==150 and prochentw ==150:
+        wrap.sprite.hide(pacman)
 
 
 @wrap.on_mouse_move()
